@@ -1,0 +1,22 @@
+.inputForm {
+    padding: 10px;
+    width: auto;
+}
+
+.container { 
+    padding: 20px;
+}
+
+.taskList { 
+    padding: 15px;
+    width: auto;
+}
+
+.taskControl {
+    padding: 15px;
+    width: auto;
+}
+
+.deleteBtn { 
+    padding-bottom: 10px;
+}

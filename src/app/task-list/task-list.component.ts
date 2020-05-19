@@ -9,25 +9,39 @@ import {Task} from './task';
 export class TaskListComponent {
   tasks = [];
 
+  showForm  = false;
+  listEmpty =  true;
+
+  toggleInput() {
+    
+    if (this.showForm == false) {
+      this.showForm = true;
+    } else { 
+      this.showForm = false;
+    }
+  }
+
   createNewTask(name, description) { 
     this.tasks.push(new Task(name, description));
+    if (this.tasks.length > 0) {
+      this.listEmpty = false;
+    }
   }
 
   removeTask(task) { 
     this.tasks.splice(this.tasks.indexOf(task), 1);
+    if (this.tasks.length == 0) {
+      this.listEmpty = true;
+    }
   }
 
   sortByName() {
-    console.log("FN ::: Sort by Name")
-    console.log(this.tasks)
     this.tasks.sort((t1: Task, t2: Task) => {
       return t1.name.localeCompare(t2.name);
     });
   }
 
   sortByDate() {
-    console.log("FN ::: Sort by Date")
-    console.log(this.tasks)
     this.tasks.sort((t1: Task, t2: Task) => {
       if (t1.dateCreated < t2.dateCreated ) {
         return -1;

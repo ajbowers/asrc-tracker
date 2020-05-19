@@ -1,14 +1,55 @@
 
+<div class="container">
 
-<input #nameField type="text" required> <br>
-<textarea #descriptionField   required></textarea> <br> 
+    <button *ngIf="!showForm" (click)="toggleInput()" class="btn btn-primary"> Add Task </button>
 
-<button (click)="createNewTask(nameField.value, descriptionField.value)"> New Task </button>
-<button (click)="sortByName()"> Sort by Name </button>
-<button (click)="sortByDate()"> Sort by Date Created </button>
-<div *ngFor='let t of tasks; let i be index'>
-    <h1>{{ t.name }}</h1> 
-    <p> Description: {{ t.description }}</p>
-    <p> Create Date: {{ t.dateCreated }}</p>
-    <button (click)="removeTask(i)"> Delete </button>
-</div> 
+    <form *ngIf="showForm" class="inputForm border border-primary">
+        <h2> Add New Task <small class="text-muted"> Input task info below </small></h2>
+        <div class="form-group">  
+            
+            <div class="row">
+                <div class="col-sm-2"><label for="nameField"> Title </label></div>
+                <div class="col-sm-4"><input class="form-control" #nameField type="text" placeholder="title" required></div>
+            </div>
+            <br>
+            <div class="row">   
+                <div class="col-sm-2"><label for="descriptionField"> Description </label></div>
+                <div class="col-sm-4"><textarea class="form-control" #descriptionField placeholder="description" required></textarea></div> 
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-4 btn-group offset-sm-2">
+                    <button type="button" (click)="createNewTask(nameField.value, descriptionField.value)" class="btn btn-primary"> Create Task </button>
+                    <button type="button" (click)="toggleInput()" class="btn btn-warning"> Cancel </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="taskControl row">
+        <br>
+        <h2 class="col-sm-2 border border-secondary" *ngIf="!listEmpty"> Tasks </h2>
+        <div class="col-sm-6 btn-group ml-auto">
+            <button *ngIf="!listEmpty" (click)="sortByName()" class="btn btn-outline-secondary"> Sort by Name </button>
+            <button *ngIf="!listEmpty" (click)="sortByDate()" class="btn btn-outline-secondary"> Sort by Date Created </button>
+        </div>
+    </div>
+
+    <div class="taskList row">
+        <div class="border border-secondary col-lg-12" *ngFor='let t of tasks; let i be index'>
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>{{ t.name }} : <small class="text-muted"> {{ t.dateCreated }}</small></h3>
+                </div>
+                <div class="col-lg-4 justify-content-end">
+                    <button class="deleteBtn btn btn-danger" (click)="removeTask(i)"> Delete </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p> {{ t.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
