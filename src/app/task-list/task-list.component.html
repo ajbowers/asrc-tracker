@@ -1,0 +1,14 @@
+
+
+<input #nameField type="text" required> <br>
+<textarea #descriptionField   required></textarea> <br> 
+
+<button (click)="createNewTask(nameField.value, descriptionField.value)"> New Task </button>
+<button (click)="sortByName()"> Sort by Name </button>
+<button (click)="sortByDate()"> Sort by Date Created </button>
+<div *ngFor='let t of tasks; let i be index'>
+    <h1>{{ t.name }}</h1> 
+    <p> Description: {{ t.description }}</p>
+    <p> Create Date: {{ t.dateCreated }}</p>
+    <button (click)="removeTask(i)"> Delete </button>
+</div> 
